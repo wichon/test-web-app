@@ -29,3 +29,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Step F"
+  job7:
+      runs-on: ubuntu-latest
+      needs: ["job3"]
+      steps:
+        - run: echo "Step G"
+  job8:
+      runs-on: ubuntu-latest
+      needs: ["job3", "job6"]
+      steps:
+        - run: echo "Step H"
