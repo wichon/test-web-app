@@ -20,3 +20,12 @@ jobs:
     needs: job3
     steps:
       - run: echo "Step D"
+  job5:
+    runs-on: ubuntu-latest
+    needs: ["job2", "job3"]
+    steps:
+      - run: echo "Step E"
+  job6:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Step F"
