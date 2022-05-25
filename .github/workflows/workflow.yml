@@ -42,12 +42,17 @@ jobs:
         - run: echo "Step"
   prepare-release:
       runs-on: ubuntu-latest
-      needs: ['vulnerability-tests', 'license-check', 'integration-tests']
+      needs: ['vulnerability-tests', 'license-check', 'integration-tests', 'owasp-tests']
       steps:
         - run: echo "Step"
   vulnerability-tests:
       runs-on: ubuntu-latest
       needs: build
+      steps:
+        - run: echo "Step"
+  owasp-tests:
+      runs-on: ubuntu-latest
+      needs: vulnerability-tests
       steps:
         - run: echo "Step"
   license-check:
