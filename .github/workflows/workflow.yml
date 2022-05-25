@@ -1,41 +1,42 @@
 name: GitHub Actions Demo
 on: [push]
 jobs:
-  job1:
+  git-clone:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Step A"
-  job2:
+  npm-install:
     runs-on: ubuntu-latest
-    needs: job1
+    needs: git-clone
     steps:
       - run: echo "Step B"
-  job3:
+  static-scan:
     runs-on: ubuntu-latest
-    needs: job1
+    needs: npm-install
     steps:
       - run: echo "Step C"
-  job4:
+  lint:
     runs-on: ubuntu-latest
-    needs: job3
+    needs: npm-install
     steps:
       - run: echo "Step D"
-  job5:
+  unit-tests:
     runs-on: ubuntu-latest
-    needs: ["job2", "job3"]
+    needs: npm-install
     steps:
       - run: echo "Step E"
-  job6:
+  build:
     runs-on: ubuntu-latest
+    needs: ['static-scan', 'lint', 'unit-tests']
     steps:
       - run: echo "Step F"
-  job7:
+  integration-tests:
       runs-on: ubuntu-latest
-      needs: ["job3"]
+      needs: build
       steps:
         - run: echo "Step G"
-  job8:
+  publish:
       runs-on: ubuntu-latest
-      needs: ["job3", "job6"]
+      needs: integration-tests
       steps:
         - run: echo "Step H"
