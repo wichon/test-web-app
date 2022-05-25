@@ -4,39 +4,59 @@ jobs:
   git-clone:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Step A"
+      - run: echo "Step"
   npm-install:
     runs-on: ubuntu-latest
     needs: git-clone
     steps:
-      - run: echo "Step B"
+      - run: echo "Step"
   static-scan:
     runs-on: ubuntu-latest
     needs: npm-install
     steps:
-      - run: echo "Step C"
+      - run: echo "Step"
   lint:
     runs-on: ubuntu-latest
     needs: npm-install
     steps:
-      - run: echo "Step D"
+      - run: echo "Step"
   unit-tests:
     runs-on: ubuntu-latest
     needs: npm-install
     steps:
-      - run: echo "Step E"
+      - run: echo "Step"
   build:
     runs-on: ubuntu-latest
     needs: ['static-scan', 'lint', 'unit-tests']
     steps:
-      - run: echo "Step F"
+      - run: echo "Step"
   integration-tests:
       runs-on: ubuntu-latest
       needs: build
       steps:
-        - run: echo "Step G"
+        - run: echo "Step"
+  performance-tests:
+      runs-on: ubuntu-latest
+      needs: build
+      steps:
+        - run: echo "Step"
   publish:
       runs-on: ubuntu-latest
       needs: integration-tests
       steps:
-        - run: echo "Step H"
+        - run: echo "Step"
+  vulnerability-tests:
+      runs-on: ubuntu-latest
+      needs: integration-tests
+      steps:
+        - run: echo "Step"
+  license-check:
+      runs-on: ubuntu-latest
+      needs: integration-tests
+      steps:
+        - run: echo "Step"
+  cache-node-deps:
+      runs-on: ubuntu-latest
+      needs: npm-install
+      steps:
+        - run: echo "Step"
